@@ -8,6 +8,7 @@ import br.com.livrenz.biblioteca_api.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -29,6 +30,13 @@ public class ClienteAdapterImpl implements ClienteAdapter {
         Optional<ClienteEntity> clienteBuscadoPeloId = repository.findById(id);
 
         return clienteBuscadoPeloId.map(mapper::toModel);
+    }
+
+    @Override
+    public List<Cliente> listarTodosCliente() {
+        return repository.findAll().stream()
+                .map(mapper::toModel)
+                .toList();
     }
 
     @Override

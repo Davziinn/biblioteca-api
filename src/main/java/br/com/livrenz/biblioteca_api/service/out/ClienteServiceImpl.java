@@ -9,6 +9,7 @@ import br.com.livrenz.biblioteca_api.service.in.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,5 +38,10 @@ public class ClienteServiceImpl implements ClienteService {
         return repository.buscarClientePorId(id).orElseThrow(
                 () -> new ClienteNotFoundException("Cliente não encontrado")
         );
+    }
+
+    @Override
+    public List<Cliente> buscarTodosOsClientes() {
+        return repository.listarTodosCliente();
     }
 }

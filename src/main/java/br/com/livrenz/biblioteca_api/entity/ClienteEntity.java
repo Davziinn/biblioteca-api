@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "TB_CLI")
@@ -30,5 +30,5 @@ public class ClienteEntity {
 
     @CreationTimestamp
     @Column(name = "DT_CRI_CLI")
-    private LocalDate dataCriacao;
+    private LocalDateTime dataCriacao;
 }

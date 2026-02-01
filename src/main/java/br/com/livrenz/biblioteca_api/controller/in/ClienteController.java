@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 public interface ClienteController {
 
     @PostMapping
@@ -15,4 +17,7 @@ public interface ClienteController {
 
     @GetMapping("/{id}")
     ResponseEntity<ClienteResponseDTO> buscarClientePorId (@PathVariable Long id);
+
+    @GetMapping
+    ResponseEntity<List<ClienteResponseDTO>> listarTodosOsCliente();
 }

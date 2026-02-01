@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/cliente")
 public class ClienteRestController implements ClienteController {
@@ -32,5 +34,13 @@ public class ClienteRestController implements ClienteController {
         ClienteResponseDTO clienteResponseBuscado = mapper.toResponseDTO(clienteService.buscarClienteById(id));
 
         return ResponseEntity.status(HttpStatus.FOUND).body(clienteResponseBuscado);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ClienteResponseDTO>> listarTodosOsCliente() {
+        List<ClienteResponseDTO> listaDeClientesCadastrados = clienteService.buscarTodosOsClientes().stream()
+                .map(mapper::toResponseDTO)
+                .toList();
+        return ResponseEntity.status(HttpStatus.FOUND).body(listaDeClientesCadastrados);
     }
 }

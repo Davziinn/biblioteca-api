@@ -2,7 +2,7 @@ package br.com.livrenz.biblioteca_api.model;
 
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -12,5 +12,5 @@ public class Cliente {
     private Long id;
     private String nome;
     private String cpf;
-    private LocalDate dataCriacao;
+    private LocalDateTime dataCriacao;
 }

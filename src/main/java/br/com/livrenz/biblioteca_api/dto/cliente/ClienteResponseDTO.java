@@ -1,11 +1,11 @@
 package br.com.livrenz.biblioteca_api.dto.cliente;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public record ClienteResponseDTO(
         Long id,
         String nome,
         String cpf,
-        LocalDate dataCriacao
+        LocalDateTime dataCriacao
 ) {
 }
