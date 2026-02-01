@@ -25,7 +25,7 @@ public class ClienteEntity {
     @Column(name = "NM_CLI", nullable = false)
     private String nome;
 
-    @Column(name = "CPF_CLI", nullable = false, unique = true)
+    @Column(name = "CPF_CLI", nullable = false, unique = true, length = 11)
     private String cpf;
 
     @CreationTimestamp
