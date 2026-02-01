@@ -2,7 +2,7 @@ package br.com.livrenz.biblioteca_api.model;
 
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -15,5 +15,5 @@ public class Autor {
     private Long id;
     private String nome;
     private List<Livro> livros;
-    private LocalDate dataCriacao;
+    private LocalDateTime dataCriacao;
 }
