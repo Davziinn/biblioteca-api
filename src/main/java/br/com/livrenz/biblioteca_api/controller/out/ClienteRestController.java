@@ -51,4 +51,11 @@ public class ClienteRestController implements ClienteController {
 
         return ResponseEntity.ok().body(clienteEditado);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarCliente (@PathVariable Long id) {
+        clienteService.deletarCliente(id);
+
+        return ResponseEntity.noContent().build();
+    }
 }

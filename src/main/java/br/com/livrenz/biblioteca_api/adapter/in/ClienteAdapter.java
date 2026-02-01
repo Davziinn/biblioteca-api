@@ -14,4 +14,6 @@ public interface ClienteAdapter {
     List<Cliente> listarTodosCliente();
 
     Optional<Cliente> buscarClientePorCpf (String cpf);
+
+    void deletarClientePorId (Long id);
 }

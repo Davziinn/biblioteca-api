@@ -13,4 +13,6 @@ public interface ClienteService {
     List<Cliente> buscarTodosOsClientes();
 
     Cliente editarCliente (Long id, Cliente cliente);
+
+    void deletarCliente (Long id);
 }

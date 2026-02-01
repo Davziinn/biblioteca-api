@@ -20,4 +20,7 @@ public interface ClienteController {
 
     @PutMapping("/{id}")
     ResponseEntity<ClienteResponseDTO> editarCliente (@PathVariable Long id, @RequestBody ClienteRequestDTO clienteRequestDTO);
+
+    @DeleteMapping("/{id}")
+    ResponseEntity<Void> deletarCliente (@PathVariable Long id);
 }

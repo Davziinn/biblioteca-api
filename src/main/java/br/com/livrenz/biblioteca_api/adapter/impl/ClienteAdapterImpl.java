@@ -46,4 +46,9 @@ public class ClienteAdapterImpl implements ClienteAdapter {
 
         return clienteBuscadoPeloCpf.map(mapper::toModel);
     }
+
+    @Override
+    public void deletarClientePorId(Long id) {
+        repository.deleteById(id);
+    }
 }

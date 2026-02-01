@@ -65,4 +65,13 @@ public class ClienteServiceImpl implements ClienteService {
 
         return repository.salvarCliente(clienteAtualizado);
     }
+
+    @Override
+    public void deletarCliente(Long id) {
+        try {
+            repository.deletarClientePorId(id);
+        } catch (NullPointerException ex) {
+            ex.getMessage();
+        }
+    }
 }
