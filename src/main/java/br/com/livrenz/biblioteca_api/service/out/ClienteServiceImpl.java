@@ -2,6 +2,7 @@ package br.com.livrenz.biblioteca_api.service.out;
 
 import br.com.livrenz.biblioteca_api.adapter.in.ClienteAdapter;
 import br.com.livrenz.biblioteca_api.exceptions.ClienteJaExisteException;
+import br.com.livrenz.biblioteca_api.exceptions.ClienteNotFoundException;
 import br.com.livrenz.biblioteca_api.mapper.in.ClienteMapper;
 import br.com.livrenz.biblioteca_api.model.Cliente;
 import br.com.livrenz.biblioteca_api.service.in.ClienteService;
@@ -29,5 +30,12 @@ public class ClienteServiceImpl implements ClienteService {
 
         return repository.salvarCliente(cliente);
 
+    }
+
+    @Override
+    public Cliente buscarClienteById(Long id) {
+        return repository.buscarClientePorId(id).orElseThrow(
+                () -> new ClienteNotFoundException("Cliente não encontrado")
+        );
     }
 }

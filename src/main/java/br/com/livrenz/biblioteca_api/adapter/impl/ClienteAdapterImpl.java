@@ -25,9 +25,16 @@ public class ClienteAdapterImpl implements ClienteAdapter {
     }
 
     @Override
-    public Optional<Cliente> buscarClientePorCpf(String cpf) {
-        Optional<ClienteEntity> clienteBuscado = repository.findByCpf(cpf);
+    public Optional<Cliente> buscarClientePorId(Long id) {
+        Optional<ClienteEntity> clienteBuscadoPeloId = repository.findById(id);
 
-        return clienteBuscado.map(mapper::toModel);
+        return clienteBuscadoPeloId.map(mapper::toModel);
+    }
+
+    @Override
+    public Optional<Cliente> buscarClientePorCpf(String cpf) {
+        Optional<ClienteEntity> clienteBuscadoPeloCpf = repository.findByCpf(cpf);
+
+        return clienteBuscadoPeloCpf.map(mapper::toModel);
     }
 }

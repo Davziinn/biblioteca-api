@@ -30,4 +30,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handleClienteJaExisteException (ClienteJaExisteException ex) {
         return buildResponse(HttpStatus.FOUND, ex.getMessage());
     }
+
+    @ExceptionHandler(ClienteNotFoundException.class)
+    public ResponseEntity<Object> handleClienteNotFoundException (ClienteNotFoundException ex) {
+        return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
 }

@@ -8,5 +8,7 @@ public interface ClienteAdapter {
 
     Cliente salvarCliente (Cliente cliente);
 
+    Optional<Cliente> buscarClientePorId (Long id);
+
     Optional<Cliente> buscarClientePorCpf (String cpf);
 }
