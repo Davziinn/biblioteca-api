@@ -5,6 +5,7 @@ import br.com.livrenz.biblioteca_api.dto.cliente.ClienteRequestDTO;
 import br.com.livrenz.biblioteca_api.dto.cliente.ClienteResponseDTO;
 import br.com.livrenz.biblioteca_api.mapper.in.ClienteMapper;
 import br.com.livrenz.biblioteca_api.service.in.ClienteService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class ClienteRestController implements ClienteController {
     private ClienteMapper mapper;
 
     @PostMapping
-    public ResponseEntity<ClienteResponseDTO> cadastrarCliente(@RequestBody ClienteRequestDTO requestDTO) {
+    public ResponseEntity<ClienteResponseDTO> cadastrarCliente(@Valid @RequestBody ClienteRequestDTO requestDTO) {
         ClienteResponseDTO clienteResponse = mapper.toResponseDTO(clienteService.cadastrarCliente(mapper.toModel(requestDTO)));
 
         return ResponseEntity.ok().body(clienteResponse);
@@ -42,5 +43,12 @@ public class ClienteRestController implements ClienteController {
                 .map(mapper::toResponseDTO)
                 .toList();
         return ResponseEntity.status(HttpStatus.FOUND).body(listaDeClientesCadastrados);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ClienteResponseDTO> editarCliente (@Valid @PathVariable Long id, @RequestBody ClienteRequestDTO clienteRequestDTO) {
+       ClienteResponseDTO clienteEditado = mapper.toResponseDTO(clienteService.editarCliente(id, mapper.toModel(clienteRequestDTO)));
+
+        return ResponseEntity.ok().body(clienteEditado);
     }
 }

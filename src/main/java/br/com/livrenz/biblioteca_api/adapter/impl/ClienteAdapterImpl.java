@@ -39,6 +39,7 @@ public class ClienteAdapterImpl implements ClienteAdapter {
                 .toList();
     }
 
+
     @Override
     public Optional<Cliente> buscarClientePorCpf(String cpf) {
         Optional<ClienteEntity> clienteBuscadoPeloCpf = repository.findByCpf(cpf);

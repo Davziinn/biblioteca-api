@@ -44,4 +44,25 @@ public class ClienteServiceImpl implements ClienteService {
     public List<Cliente> buscarTodosOsClientes() {
         return repository.listarTodosCliente();
     }
+
+    @Override
+    public Cliente editarCliente(Long id, Cliente cliente) {
+        Cliente clienteBuscado = repository.buscarClientePorId(id)
+                .orElseThrow(
+                        () -> new ClienteNotFoundException("Cliente não encontrado")
+                );
+
+        repository.buscarClientePorCpf(cliente.getCpf()).ifPresent(clienteComMesmoCpf -> {
+            if (!clienteComMesmoCpf.getId().equals(id)) {
+                throw new ClienteJaExisteException("Erro: O CPF [" + cliente.getCpf() + "] já pertence a outro cliente.");
+            }
+        });
+
+        Cliente clienteAtualizado = clienteBuscado.toBuilder()
+                .nome(cliente.getNome())
+                .cpf(cliente.getCpf())
+                .build();
+
+        return repository.salvarCliente(clienteAtualizado);
+    }
 }

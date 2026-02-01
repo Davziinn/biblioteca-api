@@ -11,4 +11,6 @@ public interface ClienteService {
     Cliente buscarClienteById (Long id);
 
     List<Cliente> buscarTodosOsClientes();
+
+    Cliente editarCliente (Long id, Cliente cliente);
 }

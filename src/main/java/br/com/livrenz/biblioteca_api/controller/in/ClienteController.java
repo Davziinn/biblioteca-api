@@ -3,10 +3,7 @@ package br.com.livrenz.biblioteca_api.controller.in;
 import br.com.livrenz.biblioteca_api.dto.cliente.ClienteRequestDTO;
 import br.com.livrenz.biblioteca_api.dto.cliente.ClienteResponseDTO;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,4 +17,7 @@ public interface ClienteController {
 
     @GetMapping
     ResponseEntity<List<ClienteResponseDTO>> listarTodosOsCliente();
+
+    @PutMapping("/{id}")
+    ResponseEntity<ClienteResponseDTO> editarCliente (@PathVariable Long id, @RequestBody ClienteRequestDTO clienteRequestDTO);
 }
