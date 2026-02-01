@@ -1,6 +1,5 @@
 package br.com.livrenz.biblioteca_api.model;
 
-import br.com.livrenz.biblioteca_api.entity.AutorEntity;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -17,5 +16,5 @@ public class Livro {
     private Boolean identificadorDisponivel;
     private LocalDate dataCriacao;
     private LocalDate dataAtualizacao;
-    private AutorEntity autor;
+    private Autor autor;
 }
