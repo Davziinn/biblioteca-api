@@ -9,4 +9,6 @@ public interface LivroService {
     Livro salvar (Livro livro);
 
     List<Livro> listarTodosOsLivros ();
+
+    List<Livro> buscarLivrosPorTitulo (String titulo);
 }

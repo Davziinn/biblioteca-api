@@ -4,6 +4,7 @@ import br.com.livrenz.biblioteca_api.controller.in.LivroController;
 import br.com.livrenz.biblioteca_api.dto.livro.LivroRequestDTO;
 import br.com.livrenz.biblioteca_api.dto.livro.LivroResponseDTO;
 import br.com.livrenz.biblioteca_api.mapper.in.LivroMapper;
+import br.com.livrenz.biblioteca_api.model.Livro;
 import br.com.livrenz.biblioteca_api.service.in.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,5 +36,12 @@ public class LivroRestController implements LivroController {
                 .toList();
 
         return ResponseEntity.ok().body(listaLivros);
+    }
+
+    @GetMapping("/{titulo}")
+    public ResponseEntity<List<Livro>> buscarLivroPeloTitulo (@PathVariable String titulo) {
+        List<Livro> livroEncontrado = service.buscarLivrosPorTitulo(titulo);
+
+        return ResponseEntity.ok().body(livroEncontrado);
     }
 }

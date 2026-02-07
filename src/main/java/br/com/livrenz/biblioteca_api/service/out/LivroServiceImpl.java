@@ -3,6 +3,7 @@ package br.com.livrenz.biblioteca_api.service.out;
 import br.com.livrenz.biblioteca_api.adapter.in.AutorAdapter;
 import br.com.livrenz.biblioteca_api.adapter.in.LivroAdapter;
 import br.com.livrenz.biblioteca_api.exceptions.AutorNotFoundException;
+import br.com.livrenz.biblioteca_api.exceptions.LivroNotFoundException;
 import br.com.livrenz.biblioteca_api.mapper.in.LivroMapper;
 import br.com.livrenz.biblioteca_api.model.Autor;
 import br.com.livrenz.biblioteca_api.model.Livro;
@@ -44,6 +45,14 @@ public class LivroServiceImpl implements LivroService {
         return livroRepository.buscarTodosOsLivros().stream()
                 .filter(Livro::getIdentificadorDisponivel)
                 .toList();
+    }
+
+    @Override
+    public List<Livro> buscarLivrosPorTitulo (String titulo) {
+        return livroRepository.buscarLivroByTitulo(titulo)
+                .orElseThrow(
+                        () -> new LivroNotFoundException("Livro indisponível ou não encontrado")
+                );
     }
 
 

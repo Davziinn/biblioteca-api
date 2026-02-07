@@ -35,4 +35,14 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handleClienteNotFoundException (ClienteNotFoundException ex) {
         return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
     }
+
+    @ExceptionHandler(AutorNotFoundException.class)
+    public ResponseEntity<Object> handleAutorNotFoundException (AutorNotFoundException ex) {
+        return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
+
+    @ExceptionHandler(LivroNotFoundException.class)
+    public ResponseEntity<Object> handleLivroNotFoundException (LivroNotFoundException ex) {
+        return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
 }
