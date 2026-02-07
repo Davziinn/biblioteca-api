@@ -7,7 +7,7 @@ import br.com.livrenz.biblioteca_api.model.Livro;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {AutorMapper.class})
 public interface LivroMapper {
     Livro toModel (LivroEntity entity);
 

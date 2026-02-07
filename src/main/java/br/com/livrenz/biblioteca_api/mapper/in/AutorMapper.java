@@ -5,10 +5,12 @@ import br.com.livrenz.biblioteca_api.dto.autor.AutorResponseDTO;
 import br.com.livrenz.biblioteca_api.entity.AutorEntity;
 import br.com.livrenz.biblioteca_api.model.Autor;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface AutorMapper {
 
+    @Mapping(target = "livros", ignore = true)
     Autor toModel(AutorEntity entity);
 
     AutorEntity toEntity (Autor model);

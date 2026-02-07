@@ -7,10 +7,9 @@ import br.com.livrenz.biblioteca_api.mapper.in.LivroMapper;
 import br.com.livrenz.biblioteca_api.service.in.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/livro")
@@ -27,5 +26,14 @@ public class LivroRestController implements LivroController {
         LivroResponseDTO livroSalvo = mapper.toResponseDTO(service.salvar(mapper.toModel(requestDTO)));
 
         return ResponseEntity.ok().body(livroSalvo);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<LivroResponseDTO>> buscarLivros() {
+        List<LivroResponseDTO> listaLivros = service.listarTodosOsLivros().stream()
+                .map(mapper::toResponseDTO)
+                .toList();
+
+        return ResponseEntity.ok().body(listaLivros);
     }
 }

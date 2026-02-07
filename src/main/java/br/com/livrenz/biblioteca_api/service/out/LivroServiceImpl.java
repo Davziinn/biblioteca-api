@@ -10,11 +10,13 @@ import br.com.livrenz.biblioteca_api.service.in.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LivroServiceImpl implements LivroService {
 
     @Autowired
-    private LivroAdapter repository;
+    private LivroAdapter livroRepository;
 
     @Autowired
     private AutorAdapter autorRepository;
@@ -33,6 +35,16 @@ public class LivroServiceImpl implements LivroService {
                 .autor(autorBuscado)
                 .build();
 
-        return repository.salvarLivro(livroDoAutor);
+        return livroRepository.salvarLivro(livroDoAutor);
     }
+
+    @Override
+    public List<Livro> listarTodosOsLivros() {
+
+        return livroRepository.buscarTodosOsLivros().stream()
+                .filter(Livro::getIdentificadorDisponivel)
+                .toList();
+    }
+
+
 }
