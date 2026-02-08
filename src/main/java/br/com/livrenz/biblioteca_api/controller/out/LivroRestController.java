@@ -44,4 +44,11 @@ public class LivroRestController implements LivroController {
 
         return ResponseEntity.ok().body(livroEncontrado);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarLivroPorId (@PathVariable Long id) {
+        service.deletarLivro(id);
+
+        return ResponseEntity.ok().build();
+    }
 }

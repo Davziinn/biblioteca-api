@@ -11,4 +11,6 @@ public interface LivroService {
     List<Livro> listarTodosOsLivros ();
 
     List<Livro> buscarLivrosPorTitulo (String titulo);
+
+    void deletarLivro (Long id);
 }

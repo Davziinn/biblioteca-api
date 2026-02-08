@@ -41,18 +41,26 @@ public class LivroServiceImpl implements LivroService {
 
     @Override
     public List<Livro> listarTodosOsLivros() {
-
         return livroRepository.buscarTodosOsLivros().stream()
                 .filter(Livro::getIdentificadorDisponivel)
                 .toList();
     }
 
     @Override
-    public List<Livro> buscarLivrosPorTitulo (String titulo) {
-        return livroRepository.buscarLivroByTitulo(titulo)
+    public List<Livro> buscarLivrosPorTitulo(String titulo) {
+        List<Livro> livros = livroRepository.buscarLivroByTitulo(titulo)
                 .orElseThrow(
                         () -> new LivroNotFoundException("Livro indisponível ou não encontrado")
                 );
+
+        return livros.stream()
+                .filter(Livro::getIdentificadorDisponivel)
+                .toList();
+    }
+
+    @Override
+    public void deletarLivro(Long id) {
+        livroRepository.deletarLivroById(id);
     }
 
 

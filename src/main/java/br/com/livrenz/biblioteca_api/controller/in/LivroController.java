@@ -4,10 +4,7 @@ import br.com.livrenz.biblioteca_api.dto.livro.LivroRequestDTO;
 import br.com.livrenz.biblioteca_api.dto.livro.LivroResponseDTO;
 import br.com.livrenz.biblioteca_api.model.Livro;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,4 +18,7 @@ public interface LivroController {
 
     @GetMapping("/{titulo}")
     ResponseEntity<List<Livro>>  buscarLivroPeloTitulo (@PathVariable String titulo);
+
+    @DeleteMapping("/{id}")
+    ResponseEntity<Void> deletarLivroPorId (@PathVariable Long id);
 }

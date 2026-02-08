@@ -43,4 +43,9 @@ public class LivroAdapterImpl implements LivroAdapter {
 
         return Optional.of(modelos);
     }
+
+    @Override
+    public void deletarLivroById(Long id) {
+        repository.deleteById(id);
+    }
 }
