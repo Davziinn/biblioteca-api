@@ -45,6 +45,13 @@ public class LivroAdapterImpl implements LivroAdapter {
     }
 
     @Override
+    public Optional<Livro> buscarLivroById(Long id) {
+        Optional<LivroEntity> livroEncontrado = repository.findById(id);
+
+        return livroEncontrado.map(mapper::toModel);
+    }
+
+    @Override
     public void deletarLivroById(Long id) {
         repository.deleteById(id);
     }

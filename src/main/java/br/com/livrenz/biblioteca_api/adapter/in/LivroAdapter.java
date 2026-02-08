@@ -13,5 +13,7 @@ public interface LivroAdapter {
 
     Optional<List<Livro>> buscarLivroByTitulo (String titulo);
 
+    Optional<Livro> buscarLivroById (Long id);
+
     void deletarLivroById (Long id);
 }

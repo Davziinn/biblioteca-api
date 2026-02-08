@@ -8,6 +8,7 @@ import br.com.livrenz.biblioteca_api.mapper.in.EmprestimoMapper;
 import br.com.livrenz.biblioteca_api.mapper.in.LivroMapper;
 import br.com.livrenz.biblioteca_api.model.Cliente;
 import br.com.livrenz.biblioteca_api.model.Emprestimo;
+import br.com.livrenz.biblioteca_api.model.Livro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,7 +37,7 @@ public class EmprestimoMapperImpl implements EmprestimoMapper {
 
     @Override
     public EmprestimoEntity toEntity(Emprestimo model) {
-        if(model == null) return null;
+        if (model == null) return null;
 
         return EmprestimoEntity.builder()
                 .id(model.getId())
@@ -50,16 +51,18 @@ public class EmprestimoMapperImpl implements EmprestimoMapper {
 
     @Override
     public Emprestimo toModel(EmprestimoRequestDTO dto) {
-        if(dto == null) return null;
+        if (dto == null) return null;
 
         return Emprestimo.builder()
+                .cliente(Cliente.builder().cpf(dto.getCpf()).build())
+                .livro(Livro.builder().titulo(dto.getTitulo()).build())
                 .statusEmprestimo(dto.getStatusEmprestimo())
                 .build();
     }
 
     @Override
     public EmprestimoResponseDTO toResponseDTO(Emprestimo model) {
-        if(model == null) return null;
+        if (model == null) return null;
 
         return new EmprestimoResponseDTO(
                 model.getId(),

@@ -12,7 +12,5 @@ public class EmprestimoRequestDTO {
     private String nome;
     private String cpf;
     private String titulo;
-    private String descricao;
-    private Boolean identificadorDisponivel;
     private StatusEmprestimo statusEmprestimo;
 }

@@ -45,4 +45,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handleLivroNotFoundException (LivroNotFoundException ex) {
         return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
     }
+
+    @ExceptionHandler(LivroIndisponivelException.class)
+    public ResponseEntity<Object> handleLivroIndisponivelException (LivroIndisponivelException ex) {
+        return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
 }
