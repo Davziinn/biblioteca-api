@@ -39,9 +39,6 @@ public class EmprestimoEntity {
     @CreationTimestamp
     private LocalDate dataEmprestimo;
 
-    @Column(name = "DT_PREV_DEV")
-    private LocalDate dataPrevistaDevolucao;
-
     @Column(name = "DT_DEV")
     private LocalDate dataDevolucao;
 }

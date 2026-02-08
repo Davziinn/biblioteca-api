@@ -16,6 +16,5 @@ public class Emprestimo {
     private Livro livro;
     private StatusEmprestimo statusEmprestimo;
     private LocalDate dataEmprestimo;
-    private LocalDate dataPrevistaDevolucao;
     private LocalDate dataDevolucao;
 }
