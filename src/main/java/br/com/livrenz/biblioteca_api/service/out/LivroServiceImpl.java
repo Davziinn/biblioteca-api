@@ -63,5 +63,12 @@ public class LivroServiceImpl implements LivroService {
         livroRepository.deletarLivroById(id);
     }
 
+    @Override
+    public Livro setarLivroComoIndisponivel(Livro livro) {
+        return livroRepository.salvarLivro(livro.toBuilder()
+                .identificadorDisponivel(false)
+                .build());
+    }
+
 
 }

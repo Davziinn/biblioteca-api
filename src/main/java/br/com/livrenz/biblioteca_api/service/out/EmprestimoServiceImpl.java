@@ -12,10 +12,12 @@ import br.com.livrenz.biblioteca_api.model.Cliente;
 import br.com.livrenz.biblioteca_api.model.Emprestimo;
 import br.com.livrenz.biblioteca_api.model.Livro;
 import br.com.livrenz.biblioteca_api.service.in.EmprestimoService;
+import br.com.livrenz.biblioteca_api.service.in.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,6 +32,9 @@ public class EmprestimoServiceImpl implements EmprestimoService {
     @Autowired
     private LivroAdapter livroRepository;
 
+    @Autowired
+    private LivroService livroService;
+
     @Override
     public Emprestimo salvarEmprestimo(Emprestimo emprestimo) {
         Cliente clienteBuscado = clienteRepository.buscarClientePorCpf(emprestimo.getCliente().getCpf())
@@ -37,19 +42,23 @@ public class EmprestimoServiceImpl implements EmprestimoService {
                         () -> new ClienteNotFoundException("Cliente não encontrado")
                 );
 
-        List<Livro> livroBuscado = livroRepository.buscarLivroByTitulo(emprestimo.getLivro().getTitulo())
+        List<Livro> livrosBuscados = livroRepository.buscarLivroByTitulo(emprestimo.getLivro().getTitulo())
                 .orElseThrow(
                         () -> new LivroNotFoundException("Livro não encontrado")
                 );
 
-        for (Livro livro : livroBuscado) {
+        for (Livro livro : livrosBuscados) {
             if (!livro.getIdentificadorDisponivel()) {
                 throw new LivroIndisponivelException("Livro indisponível para emprestimo");
             }
+
+            Livro livrosEmprestimo = livroService.setarLivroComoIndisponivel(livro);
+
+
             emprestimo = emprestimo.toBuilder()
                     .statusEmprestimo(StatusEmprestimo.EMPRESTADO)
                     .cliente(clienteBuscado)
-                    .livro(livro)
+                    .livro(livrosEmprestimo)
                     .dataDevolucao(LocalDate.now().plusDays(7))
                     .build();
         }
