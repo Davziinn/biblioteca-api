@@ -6,4 +6,6 @@ public interface EmprestimoService {
     Emprestimo salvarEmprestimo(Emprestimo emprestimo);
 
     Emprestimo consultarEmprestimo(Long id);
+
+    Emprestimo devolverEmprestimo(Long id);
 }

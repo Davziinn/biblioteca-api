@@ -8,4 +8,5 @@ public interface EmprestimoAdapter {
     Emprestimo salvar(Emprestimo emprestimo);
 
     Optional<Emprestimo> buscarEmprestimoById (Long id);
+
 }

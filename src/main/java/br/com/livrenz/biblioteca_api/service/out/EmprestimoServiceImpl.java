@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -59,7 +58,7 @@ public class EmprestimoServiceImpl implements EmprestimoService {
                     .statusEmprestimo(StatusEmprestimo.EMPRESTADO)
                     .cliente(clienteBuscado)
                     .livro(livrosEmprestimo)
-                    .dataDevolucao(LocalDate.now().plusDays(7))
+                    .dataPrevistaDevolucao(LocalDate.now().plusDays(7))
                     .build();
         }
 
@@ -72,5 +71,34 @@ public class EmprestimoServiceImpl implements EmprestimoService {
         return emprestimoRepository.buscarEmprestimoById(id).orElseThrow(
                 () -> new EmprestimoNotFoundException("Emprestimo não encontrado!")
         );
+    }
+
+    @Override
+    public Emprestimo devolverEmprestimo(Long id) {
+        Emprestimo emprestimoAtivo = consultarEmprestimo(id);
+
+        if (emprestimoAtivo.getStatusEmprestimo() == StatusEmprestimo.DEVOLVIDO ||
+                emprestimoAtivo.getStatusEmprestimo() == StatusEmprestimo.ATRASADO) {
+            throw new IllegalStateException("Este empréstimo já foi finalizado");
+        }
+
+        LocalDate hoje = LocalDate.now();
+        LocalDate dataPrevistaDevolucao = emprestimoAtivo.getDataPrevistaDevolucao();
+
+        StatusEmprestimo novoStatus;
+
+        if (hoje.isAfter(dataPrevistaDevolucao)) {
+            novoStatus = StatusEmprestimo.ATRASADO;
+        } else {
+            novoStatus = StatusEmprestimo.DEVOLVIDO;
+        }
+
+        emprestimoAtivo.getLivro().setIdentificadorDisponivel(true);
+        livroService.salvar(emprestimoAtivo.getLivro());
+
+        return emprestimoRepository.salvar(emprestimoAtivo.toBuilder()
+                .statusEmprestimo(novoStatus)
+                .dataDevolucao(LocalDate.now())
+                .build());
     }
 }

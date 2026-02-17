@@ -31,6 +31,7 @@ public class EmprestimoMapperImpl implements EmprestimoMapper {
                 .livro(livroMapper.toModel(entity.getLivro()))
                 .statusEmprestimo(entity.getStatusEmprestimo())
                 .dataEmprestimo(entity.getDataEmprestimo())
+                .dataPrevistaDevolucao(entity.getDataPrevistaDevolucao())
                 .dataDevolucao(entity.getDataDevolucao())
                 .build();
     }
@@ -45,6 +46,7 @@ public class EmprestimoMapperImpl implements EmprestimoMapper {
                 .livro(livroMapper.toEntity(model.getLivro()))
                 .statusEmprestimo(model.getStatusEmprestimo())
                 .dataEmprestimo(model.getDataEmprestimo())
+                .dataPrevistaDevolucao(model.getDataPrevistaDevolucao())
                 .dataDevolucao(model.getDataDevolucao())
                 .build();
     }
@@ -70,6 +72,7 @@ public class EmprestimoMapperImpl implements EmprestimoMapper {
                 livroMapper.toResponseDTO(model.getLivro()),
                 model.getStatusEmprestimo(),
                 model.getDataEmprestimo(),
+                model.getDataPrevistaDevolucao(),
                 model.getDataDevolucao()
         );
     }

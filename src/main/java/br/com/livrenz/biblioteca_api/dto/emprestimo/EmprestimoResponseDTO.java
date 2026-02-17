@@ -13,6 +13,7 @@ public record EmprestimoResponseDTO(
         LivroResponseDTO livro,
         StatusEmprestimo statusEmprestimo,
         LocalDate dataEmprestimo,
+        LocalDate dataPrevistaDevolucao,
         LocalDate dataDevolucao
 ) {
 }

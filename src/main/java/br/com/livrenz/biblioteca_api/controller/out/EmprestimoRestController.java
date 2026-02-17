@@ -32,4 +32,11 @@ public class EmprestimoRestController implements EmprestimoController {
 
         return ResponseEntity.ok().body(emprestimoResponseDTO);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<EmprestimoResponseDTO> devolverEmprestimo(@PathVariable Long id) {
+        EmprestimoResponseDTO emprestimoResponseDTO = mapper.toResponseDTO(emprestimoService.devolverEmprestimo(id));
+
+        return ResponseEntity.ok().body(emprestimoResponseDTO);
+    }
 }
