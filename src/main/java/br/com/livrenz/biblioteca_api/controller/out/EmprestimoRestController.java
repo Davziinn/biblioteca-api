@@ -7,10 +7,7 @@ import br.com.livrenz.biblioteca_api.mapper.in.EmprestimoMapper;
 import br.com.livrenz.biblioteca_api.service.in.EmprestimoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/emprestimo")
@@ -27,5 +24,12 @@ public class EmprestimoRestController implements EmprestimoController {
         EmprestimoResponseDTO emprestimoDTO = mapper.toResponseDTO(emprestimoService.salvarEmprestimo(mapper.toModel(emprestimo)));
 
         return ResponseEntity.ok().body(emprestimoDTO);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<EmprestimoResponseDTO> consultarEmprestimo (@PathVariable Long id) {
+        EmprestimoResponseDTO emprestimoResponseDTO = mapper.toResponseDTO(emprestimoService.consultarEmprestimo(id));
+
+        return ResponseEntity.ok().body(emprestimoResponseDTO);
     }
 }

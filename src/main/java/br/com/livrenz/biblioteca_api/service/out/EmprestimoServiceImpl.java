@@ -5,6 +5,7 @@ import br.com.livrenz.biblioteca_api.adapter.in.EmprestimoAdapter;
 import br.com.livrenz.biblioteca_api.adapter.in.LivroAdapter;
 import br.com.livrenz.biblioteca_api.enums.StatusEmprestimo;
 import br.com.livrenz.biblioteca_api.exceptions.ClienteNotFoundException;
+import br.com.livrenz.biblioteca_api.exceptions.EmprestimoNotFoundException;
 import br.com.livrenz.biblioteca_api.exceptions.LivroIndisponivelException;
 import br.com.livrenz.biblioteca_api.exceptions.LivroNotFoundException;
 import br.com.livrenz.biblioteca_api.model.Cliente;
@@ -55,5 +56,12 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 
 
         return emprestimoRepository.salvar(emprestimo);
+    }
+
+    @Override
+    public Emprestimo consultarEmprestimo(Long id) {
+        return emprestimoRepository.buscarEmprestimoById(id).orElseThrow(
+                () -> new EmprestimoNotFoundException("Emprestimo não encontrado!")
+        );
     }
 }
