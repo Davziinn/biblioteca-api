@@ -21,4 +21,7 @@ public interface LivroController {
 
     @DeleteMapping("/{id}")
     ResponseEntity<Void> deletarLivroPorId (@PathVariable Long id);
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<LivroResponseDTO>> buscarLivrosByAutor (@PathVariable Long autorId);
 }

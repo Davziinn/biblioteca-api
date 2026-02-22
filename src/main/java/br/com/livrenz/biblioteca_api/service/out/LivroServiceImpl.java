@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LivroServiceImpl implements LivroService {
@@ -68,6 +69,18 @@ public class LivroServiceImpl implements LivroService {
         return livroRepository.salvarLivro(livro.toBuilder()
                 .identificadorDisponivel(false)
                 .build());
+    }
+
+    @Override
+    public List<Livro> buscarLivrosPorAutorId(Long autorId) {
+        List<Livro> livros = livroRepository.buscarLivroByAutorId(autorId)
+                .orElseThrow(
+                        () -> new LivroNotFoundException("Autor não encontrado!")
+                );
+
+        return livros.stream()
+                .filter(Livro::getIdentificadorDisponivel)
+                .toList();
     }
 
 

@@ -45,10 +45,14 @@ public class LivroAdapterImpl implements LivroAdapter {
     }
 
     @Override
-    public Optional<Livro> buscarLivroById(Long id) {
-        Optional<LivroEntity> livroEncontrado = repository.findById(id);
+    public Optional<List<Livro>> buscarLivroByAutorId(Long autorId) {
+        List<LivroEntity> livroEncontradoByAutor = repository.findByAutorId(autorId);
 
-        return livroEncontrado.map(mapper::toModel);
+        List<Livro> modelos = livroEncontradoByAutor.stream()
+                .map(entity -> mapper.toModel(entity))
+                .toList();
+
+        return Optional.of(modelos);
     }
 
     @Override

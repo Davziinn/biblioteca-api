@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface LivroRepository extends JpaRepository<LivroEntity, Long> {
 
     List<LivroEntity> findByTitulo (String titulo);
+
+    List<LivroEntity> findByAutorId (Long autorId);
 }

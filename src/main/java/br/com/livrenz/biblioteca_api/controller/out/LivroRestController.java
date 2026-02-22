@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/livro")
@@ -50,5 +51,14 @@ public class LivroRestController implements LivroController {
         service.deletarLivro(id);
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/autor/{autorId}")
+    public ResponseEntity<List<LivroResponseDTO>> buscarLivrosByAutor (@PathVariable Long autorId) {
+        List<LivroResponseDTO> livroEncontrado = service.buscarLivrosPorAutorId(autorId).stream()
+                .map(mapper::toResponseDTO)
+                .toList();
+
+        return ResponseEntity.ok().body(livroEncontrado);
     }
 }
